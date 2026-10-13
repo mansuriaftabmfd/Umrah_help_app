@@ -1,155 +1,108 @@
-# Umrah Companion — Next.js App
+# 🕋 Umrah Companion — Your Journey. Our Support.
 
-**"Your Journey. Our Support."**
+[![Next.js 14](https://img.shields.io/badge/Next.js-14.2-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-3.4-38bdf8?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![Vercel Ready](https://img.shields.io/badge/Vercel-Deployed-000?style=for-the-badge&logo=vercel)](https://vercel.com/)
+[![Offline First](https://img.shields.io/badge/Offline--First-Dexie_IndexedDB-success?style=for-the-badge)](https://dexie.org/)
 
-A professional, offline-first Umrah companion app built with Next.js 14, TypeScript, Tailwind CSS, Dexie (IndexedDB), and Zustand.
+An **offline-first, family-focused Umrah & Hajj companion web application** built with Next.js 14, TypeScript, Tailwind CSS, and Dexie (IndexedDB). Designed to provide effortless spiritual guidance, authentic supplications, live pilgrimage counters, and family safety tracking throughout the sacred journey in Makkah and Madinah.
 
 ---
 
-## 🚀 Quick Start
+## ✨ Key Features
 
-### 1. Install Dependencies
+### 🤲 1. All 49 Official Trilingual Du’as
+- **Authentic Indo-Pak Quran Font**: Rendered in the classic 13/16-line Taj Company Mushaf script (`PDMS Saleem Quran` & `IndoPak Nastaleeq`) with clear, sharp Tashkeel (harakat, jazm, shaddah) and zero overlap.
+- **English Transliteration**: Clear Latin pronunciation for every supplication.
+- **Gujarati Pronunciation (ગુજરાતી ઉચ્ચારણ)**: Dedicated section converting Arabic transliteration into accurate Gujarati script for native Gujarati speakers.
+- **Trilingual Meanings**: Gujarati (ગુજરાતી અર્થ), Hindi (हिन्दी अर्थ), and English translations for every Dua with single-tap side-by-side comparison.
+- **Two Viewing Modes**: 
+  - **All 49 Duas List View**: Instant overview grouped by pilgrimage topics (Journey, Umrah, Makkah, Tawaf, Sa’ee, Any Time, Madinah).
+  - **Focus Card Reader View**: Distraction-free full-screen reader with font scaling controls, audio synthesis recitation, and "Padh Liya" progress tracking.
 
+### 📖 2. 13-Line Tajweed Quran Reader
+- Integrated PDF reader for the authentic 13-Line Tajweed Mushaf.
+- Fast page streaming with HTTP range requests.
+- Instant bookmarking, last-read page memory, and surah jump navigation saved locally in IndexedDB.
+
+### 🕋 3. Tawaf & Sa’ee Interactive Counters
+- **Tawaf Counter**: Track all 7 circuits around the Ka’bah with circuit-specific Duas, haptic feedback, and anti-accidental tap protection.
+- **Sa’ee Counter**: Step-by-step 7-lap counter between Safa and Marwah with green light markers and authentic Sunnah supplications.
+- Stored as append-only events in IndexedDB with undo support.
+
+### 👨‍👩‍👧‍👦 4. Family & Safety Hub
+- **Group Code System**: Create a unique family group (e.g., `MANS-786`) or join your family's group securely.
+- **Pilgrimage Roles**: Family Head, Father, Mother, Son, Daughter, Pilgrim.
+- **Real-time Live Chat**: Fast messaging with one-tap quick emergency alerts (e.g., *"Lost near Gate 79"*, *"Waiting at Hotel Lobby"*).
+- **Meeting Point & Hotel Tracker**: Shared Ka'bah gate numbers, hotel rooms, and emergency contact details cached locally.
+
+### 🌐 5. Trilingual Translator & Camera OCR
+- **Voice & Text Translation**: Instant translation between Arabic, Gujarati, Hindi, and English.
+- **Camera / Signboard OCR**: Upload or capture Arabic signs in the Haramain for instant translation into Gujarati, Hindi, or English.
+- **Quick Pilgrimage Phrases**: Pre-translated emergency and shopping phrases for Makkah and Madinah.
+
+### 📋 6. Checklist & Journey Journal
+- **Pre-Umrah Packing Checklist**: Pre-seeded essentials (Ihram, documents, medication, footwear) with live progress tracking.
+- **Journey Memories Journal**: Record spiritual reflections and milestones during your pilgrimage.
+
+---
+
+## 🛠️ Tech Stack & Architecture
+
+- **Framework**: [Next.js 14 (App Router)](https://nextjs.org/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) with curated Dark & Light themes
+- **Client Database**: [Dexie.js](https://dexie.org/) (IndexedDB for 100% offline persistence)
+- **State Management**: [Zustand](https://github.com/pmndrs/zustand)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Typography**: 
+  - Arabic: `PDMS Saleem Quran` & `IndoPak Quran` (Local offline WOFF2/TTF)
+  - Gujarati: `Noto Sans Gujarati`
+  - Hindi: `Noto Sans Devanagari`
+  - English/UI: `Inter`
+
+---
+
+## 🚀 Getting Started Locally
+
+### 1. Clone the repository
 ```bash
-cd e:\Umrah\umrah-companion
+git clone https://github.com/mansuriaftabmfd/Umrah_help_app.git
+cd Umrah_help_app
+```
+
+### 2. Install dependencies
+```bash
 npm install
 ```
 
-### 2. Copy PDF Assets
-
-Copy your existing PDFs into `public/quran/`:
-
-```
-# Copy from the prototype folder:
-copy "e:\Umrah\Umrah-Companion-quran-pdf-integrated\Umrah-Companion-quran-pdf-integrated\assets\quran-13-line-tajweed.pdf" "e:\Umrah\umrah-companion\public\quran\quran-13-line-tajweed.pdf"
-
-copy "e:\Umrah\Umrah-Companion-quran-pdf-integrated\Umrah-Companion-quran-pdf-integrated\assets\umrah-duas-source.pdf" "e:\Umrah\umrah-companion\public\quran\umrah-duas-source.pdf"
-```
-
-### 3. Generate PNG Icons (Required for PWA)
-
-The manifest references `icon-192.png` and `icon-512.png`. You can:
-- Convert `public/icons/icon.svg` using an online tool like [svg2png.com](https://svgtopng.com/)
-- Or install ImageMagick and run: `magick public/icons/icon.svg -resize 192x192 public/icons/icon-192.png`
-- Save both 192×192 and 512×512 versions to `public/icons/`
-
-### 4. Run Dev Server
-
+### 3. Run development server
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
-
-### 5. Build & Deploy
-
-```bash
-npm run build
-npm run start
-# Or deploy to Vercel: vercel --prod
-```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 📁 Project Structure
+## ⚡ Deployment to Vercel
 
-```
-src/
-├── app/
-│   ├── (app)/           # All authenticated screens (AppShell layout)
-│   │   ├── home/        # Dashboard with progress overview
-│   │   ├── guide/       # Step-by-step Umrah guide + Tawaf/Sa'i counters
-│   │   ├── duas/        # 47+ Duas reader with multi-language support
-│   │   ├── quran/       # Quran PDF reader with bookmarks
-│   │   │   └── read/    # Full-screen PDF canvas reader
-│   │   ├── checklist/   # Pre-Umrah packing checklist
-│   │   ├── journal/     # Journey journal / memories
-│   │   ├── family/      # Family chat, safety, meeting point
-│   │   ├── translate/   # Text translation (API stub)
-│   │   └── settings/    # Language, font size, theme
-│   ├── api/
-│   │   ├── translate/         # POST stub — TODO: connect to translation API
-│   │   └── translate-image/   # POST stub — TODO: Google Vision OCR
-│   ├── globals.css
-│   └── layout.tsx
-├── components/
-│   ├── AppProviders.tsx  # Client hydration wrapper
-│   ├── AppShell.tsx      # Sidebar + mobile nav layout
-│   └── ui.tsx            # Design system components
-├── data/
-│   └── duas.ts           # 47 Duas with Arabic, transliteration, translation
-├── hooks/
-│   └── useDBHydration.ts # IndexedDB → Zustand hydration hook
-├── lib/
-│   └── db.ts             # Dexie schema (IndexedDB)
-└── store/
-    └── appStore.ts       # Zustand global state
-```
+This project is pre-configured and optimized for 1-click deployment on **Vercel**:
+
+1. Push your changes to GitHub:
+   ```bash
+   git add .
+   git commit -m "Deploy update"
+   git push origin main
+   ```
+2. Go to [Vercel Dashboard](https://vercel.com/new) and click **"Import"** on `Umrah_help_app`.
+3. Framework Preset: **Next.js** (auto-detected).
+4. Click **"Deploy"**.
 
 ---
 
-## ⚙️ Features by Checkpoint
+## 📄 License
 
-### ✅ Checkpoint 1 — Foundation
-- [x] Next.js 14 App Router + TypeScript
-- [x] Tailwind CSS design tokens matching prototype
-- [x] Dark/light mode
-- [x] Dexie IndexedDB schema
-- [x] Zustand store
-- [x] App shell (sidebar + mobile nav)
-
-### ✅ Checkpoint 2 — Duas
-- [x] All 47+ Duas in `data/duas.ts`
-- [x] Arabic text preserved exactly
-- [x] Gujarati / Hindi / English transliteration & translation
-- [x] Multi-language switcher (Gujarati default)
-- [x] Font size controls
-- [x] "Padh liya" read-status saved to IndexedDB
-- [x] Group navigation (Tawaf, Sa'i, Journey, Makkah, Madinah…)
-
-### ✅ Checkpoint 3 — Counters
-- [x] Tawaf (7 rounds) + Sa'i (7 laps) counters
-- [x] Counter events stored to IndexedDB (append-only, supports undo)
-- [x] Progress rings on home dashboard
-- [x] Step advancement saved to DB
-
-### ✅ Checkpoint 4 — Quran Reader
-- [x] PDF.js canvas reader (loaded from CDN)
-- [x] Page navigation + direct page input
-- [x] Last page saved to IndexedDB
-- [x] Bookmarks saved to IndexedDB
-
-### ✅ Checkpoint 5 — Checklist
-- [x] 20 pre-seeded items across 4 categories
-- [x] Live toggle with IndexedDB persistence
-- [x] Category grouping + progress bar
-
-### ✅ Checkpoint 6 — Translate UI (stub)
-- [x] Language pair selector
-- [x] `/api/translate` stub with TODO comments
-- [x] `/api/translate-image` stub with TODO comments
-
-### ✅ Checkpoint 7 — Family & Chat UI (mock data)
-- [x] Chat tab (messages saved locally to IndexedDB)
-- [x] Quick replies
-- [x] Emergency alert
-- [x] Meeting point + hotel info (read-only, editing needs backend)
-
----
-
-## 🔌 API Stubs
-
-| Endpoint | Status | Description |
-|----------|--------|-------------|
-| `POST /api/translate` | **Stub** | Connect to Google Cloud Translation / DeepL / OpenAI |
-| `POST /api/translate-image` | **Stub** | Connect to Google Vision OCR then translate |
-
----
-
-## 🌐 Deployment (Vercel)
-
-1. Push to GitHub
-2. Import repo in [vercel.com](https://vercel.com)
-3. Set build command: `npm run build`
-4. Set output dir: `.next`
-5. Deploy — Vercel auto-detects Next.js
+This project is open-source and intended for non-profit spiritual guidance and community benefit.
+May Allah accept the pilgrimage of all pilgrims. 🤲

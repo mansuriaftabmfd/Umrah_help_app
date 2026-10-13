@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+/* ─── CSS custom properties (design tokens) ─────────────────────────────────── */
+:root {
+  /* Dark mode defaults */
+  --bg:             #0E0E0F;
+  --card:           #151516;
+  --card-elevated:  #181819;
+  --border:         #2C2C2E;
+  --border-light:   #353538;
+  --primary:        #0F6E56;
+  --primary-hover:  #0b5643;
+  --bright-green:   #16A66F;
+  --gold:           #C8A24A;
+  --gold-muted:     #9e7e31;
+  --danger:         #EF4444;
+  --success:        #16A34A;
+  --text-primary:   #F5F5F2;
+  --text-secondary: #C5C5C0;
+  --text-muted:     #92928D;
+  --radius:         0.75rem;
+}
+
+:root.light, html.light, .light {
+  /* Light mode palette */
+  --bg:             #F8F9FA;
+  --card:           #FFFFFF;
+  --card-elevated:  #F1F3F5;
+  --border:         #E2E8F0;
+  --border-light:   #CBD5E1;
+  --primary:        #0F6E56;
+  --primary-hover:  #0b5643;
+  --bright-green:   #059669;
+  --gold:           #B45309;
+  --gold-muted:     #92400E;
+  --danger:         #DC2626;
+  --success:        #16A34A;
+  --text-primary:   #0F172A;
+  --text-secondary: #334155;
+  --text-muted:     #64748B;
+}
+
+/* ─── Base resets ────────────────────────────────────────────────────────────── */
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  height: 100%;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  height: 100%;
+  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar        { width: 5px; height: 5px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: var(--border); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-light); }
+
+/* ─── Selection ──────────────────────────────────────────────────────────────── */
+::selection { background: #0F6E56; color: #fff; }
+
+/* ─── Indo-Pak Quran Fonts (13/16-Line Taj Company Quran style) ─────────────── */
+@font-face {
+  font-family: 'PDMS Saleem Quran';
+  src: url('/fonts/pdms-saleem-quranfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IndoPak Quran';
+  src: url('/fonts/indopak-nastaleeq.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Arabic text (Indo-Pak Taj Company Quran script) ────────────────────────── */
+.arabic-text {
+  font-family: 'PDMS Saleem Quran', 'IndoPak Quran', 'Al Qalam Quran Majeed', 'Scheherazade New', 'Amiri', serif;
+  direction: rtl;
+  line-height: 2.5;
+  letter-spacing: 0;
+  word-spacing: 0.08em;
+}
+
+/* ─── Gujarati / Hindi ───────────────────────────────────────────────────────── */
+.font-gujarati { font-family: 'Noto Sans Gujarati', sans-serif; line-height: 1.75; }
+.font-hindi    { font-family: 'Noto Sans Devanagari', sans-serif; line-height: 1.75; }
+
+/* ─── Hide scrollbar (utility) ───────────────────────────────────────────────── */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ─── Focus rings ────────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--bright-green);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Font size tokens (applied via JS based on user preference) ─────────────── */
+html[data-fontsize="sm"] { font-size: 14px; }
+html[data-fontsize="md"] { font-size: 16px; }
+html[data-fontsize="lg"] { font-size: 18px; }
+html[data-fontsize="xl"] { font-size: 20px; }
+
+/* ─── Animations ──────────────────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in { animation: fadeIn 0.2s ease-out; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up { animation: slideUp 0.25s ease-out; }
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, var(--card) 25%, var(--card-elevated) 50%, var(--card) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+  border-radius: var(--radius);
+}
+
+/* ─── Pulse dot for "online" indicator ───────────────────────────────────────── */
+.pulse-dot {
+  animation: pulseDot 2s ease-in-out infinite;
+}
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* ─── Bottom nav safe area (mobile) ─────────────────────────────────────────── */
+.pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }

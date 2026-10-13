@@ -1,0 +1,11 @@
+Place the following PDF files here:
+
+1. quran-13-line-tajweed.pdf
+   Source: e:\Umrah\Umrah-Companion-quran-pdf-integrated\Umrah-Companion-quran-pdf-integrated\assets\quran-13-line-tajweed.pdf
+
+2. umrah-duas-source.pdf
+   Source: e:\Umrah\Umrah-Companion-quran-pdf-integrated\Umrah-Companion-quran-pdf-integrated\assets\umrah-duas-source.pdf
+
+Copy command (run from project root in PowerShell):
+  copy "..\Umrah-Companion-quran-pdf-integrated\Umrah-Companion-quran-pdf-integrated\assets\quran-13-line-tajweed.pdf" ".\public\quran\quran-13-line-tajweed.pdf"
+  copy "..\Umrah-Companion-quran-pdf-integrated\Umrah-Companion-quran-pdf-integrated\assets\umrah-duas-source.pdf" ".\public\quran\umrah-duas-source.pdf"
